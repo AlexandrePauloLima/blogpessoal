@@ -1,5 +1,6 @@
 package com.generation.blogpessoal.controller;
 
+
 import java.util.List;
 
 import javax.validation.Valid;
@@ -20,19 +21,20 @@ import org.springframework.web.bind.annotation.RestController;
 import com.generation.blogpessoal.model.Tema;
 import com.generation.blogpessoal.repository.TemaRepository;
 
-@RestController 
+@RestController
 @RequestMapping("/temas")
-@CrossOrigin (origins = "*", allowedHeaders = "*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class TemaController {
-	
+
 	@Autowired
 	private TemaRepository temaRepository;
-	
+
 	@GetMapping
-	public ResponseEntity<List<Tema>> getAll(){
+	public ResponseEntity<List<Tema>> getAll() {
 		return ResponseEntity.ok(temaRepository.findAll());
+
 	}
-	
+
 	@GetMapping("/{id}")
 	public ResponseEntity<Tema> getById(@PathVariable Long id) {
 		return temaRepository.findById(id)
@@ -60,7 +62,7 @@ public class TemaController {
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<?> deleteTema(@PathVariable Long id) {
+	public ResponseEntity<?> deletePostagem(@PathVariable Long id) {
 		
 		return temaRepository.findById(id)
 				.map(resposta -> {
@@ -69,6 +71,6 @@ public class TemaController {
 				})
 				.orElse(ResponseEntity.notFound().build());
 	}
-	}
 
+}
 

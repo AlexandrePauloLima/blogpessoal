@@ -17,35 +17,32 @@ import org.hibernate.annotations.UpdateTimestamp;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table(name = "tb_postagens") // = CREATLE TABLE tb_postagens ()
+@Table(name = "tb_postagens")  // CREATE TABLE tb_postagens(
 public class Postagem {
-	
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@NotBlank(message = " O atributo titulo e obrigatorio !")
-	@Size(min = 5, max = 100, message = "O atributo titulo deve possuir no minimo 5 e no maximo 100 caractere")
+	
+	@NotBlank(message = "O atributo título é Obrigatório!")
+	@Size(min = 5, max = 100, message = "O atributo titulo deve possuir no mínimo 5 e no máximo 100 caracteres")
 	private String titulo;
 	
-	@NotNull(message = " O atributo titulo e obrigatorio !")
-	@Size(min = 10, max = 1000, message = "O atributo titulo deve possuir no minimo 10 e no maximo 1000 caractere")
+	@NotNull(message = "O atributo texto é Obrigatório!")
+	@Size(min = 10, max = 1000, message = "O atributo texto deve possuir no mínimo 10 e no máximo 1000 caracteres")
 	private String texto;
 	
 	@UpdateTimestamp
 	private LocalDateTime data;
+
 	@ManyToOne
-	@JsonIgnoreProperties ("postagem")
-	private Tema tema ;
+	@JsonIgnoreProperties("postagem")
+	private Tema tema;
 	
-
-	public Tema getTema() {
-		return tema;
-	}
-
-	public void setTema(Tema tema) {
-		this.tema = tema;
-	}
-
+	@ManyToOne
+	@JsonIgnoreProperties("postagem")
+	private Usuario usuario;
+	
 	public Long getId() {
 		return id;
 	}
@@ -77,8 +74,21 @@ public class Postagem {
 	public void setData(LocalDateTime data) {
 		this.data = data;
 	}
-	
-	
-	
+
+	public Tema getTema() {
+		return tema;
+	}
+
+	public void setTema(Tema tema) {
+		this.tema = tema;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 	
 }
